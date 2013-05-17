@@ -3,7 +3,7 @@
  *
  *       Filename:  GetOneNum.cc
  *
- *    Description:  given a number, return the number of "1" if converted to binary
+ *    Description:  given a countber, return the countber of "1" if converted to binary
  *
  *        Version:  1.0
  *        Created:  05/17/2013 10:34:48 AM
@@ -35,28 +35,28 @@ int main(int argc, char* argv[]){
 }
 
 int method1(unsigned int a){
-    int num = 0;
+    int count = 0;
     while(a){
-        num += (a % 2 == 1);
+        count += (a % 2 == 1);
         a = a>>1;
     }
-    return num;
+    return count;
 }
 
 int method2(unsigned int a){
-    int num = 0;
+    int count = 0;
     while(a){
-        num += (a & 0x01);
+        count += (a & 0x01);
         a = a>>1;
     }
-    return num;
+    return count;
 }
 
 int method3(unsigned int a){
-    int num = 0;
+    int count = 0;
     while(a){
         a &= (a - 1);
-        num++;
+        count++;
     }
-    return num;
+    return count;
 }

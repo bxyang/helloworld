@@ -10,9 +10,9 @@ template <class T> class CMaxHeap {
         void MaxHeapify(const int pos);
         void PrintHeap();
         void HeapSort();
-	void HeapIncreaseKey(int pos, T key);
-	void MaxHeapInsert(T key);
-	void Remove(int pos);
+    void HeapIncreaseKey(int pos, T key);
+    void MaxHeapInsert(T key);
+    void Remove(int pos);
     private:
         T* elem_;
         int length_;
@@ -52,21 +52,21 @@ void CMaxHeap<T>::HeapSort() {
 template <class T>
 void CMaxHeap<T>::HeapIncreaseKey(int pos, T key) {
     if(pos < 0 || pos >= length_) {
-	return;
+    return;
     }
     elem_[pos] = key;
     int parent = (pos - 1 ) / 2;
     while(parent > 0) {
-	if(elem_[pos] > elem_[parent]) {
-	    T temp = elem_[pos];
-	    elem_[pos] = elem_[parent];
-	    elem_[parent] = temp;
-	    pos = parent;
-	    parent = (parent - 1) / 2;
-	}
-	else {
-	    break;
-	}
+    if(elem_[pos] > elem_[parent]) {
+        T temp = elem_[pos];
+        elem_[pos] = elem_[parent];
+        elem_[parent] = temp;
+        pos = parent;
+        parent = (parent - 1) / 2;
+    }
+    else {
+        break;
+    }
     }
     return;
 }
@@ -74,12 +74,12 @@ template <class T>
 void CMaxHeap<T>::MaxHeapInsert(T key) {
     T* temp = new T[length_];
     for (int i = 0; i < length_; i++) {
-	temp[i] = elem_[i]; 
+    temp[i] = elem_[i]; 
     }
     delete [] elem_;
     elem_ = new T[length_ + 1];
     for (int i = 0; i < length_; i++) {
-	elem_[i] = temp[i]; 
+    elem_[i] = temp[i]; 
     }
     delete [] temp;
     elem_[length_] = key - 1;

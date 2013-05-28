@@ -10,11 +10,29 @@ public class SingletonTest {
         mInstance = new SingletonTest();
     }
     private static SingletonTest mInstance;
-    private static Object obj = new Object();
     
     public static void main( String args[] ){
         System.out.println("hello world");
         SingletonTest.getInstance();
     }
+}
+
+public class SingletonTestB {
+
+    private SingletonTestB {
+
+    }
+    
+    public static getInstance() {
+        if (mInstance == null) {
+            synchronized(obj) {
+                if (mInstance == null)
+                    mInstance = new SingletonTestB();
+            }
+        }   
+    }
+    
+    private static SingletonTestB mInstance;
+    private static Object obj = new Object();
 }
 

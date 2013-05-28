@@ -37,7 +37,8 @@ class LinkList {
     void QuickSort(bool is_ascend = true);
     void print();
  private:
-    void QuickSortInterval(bool is_ascend, Node<T>* start_prev, Node<T>* end_post);
+    void QuickSortInterval(bool is_ascend,
+        Node<T>* start_prev, Node<T>* end_post);
     bool compare(bool is_ascend, T left, T right);
     Node<T>* Partion(bool is_ascend, Node<T>* start_prev, Node<T>* end_post);
     Node<T>* head;
@@ -188,7 +189,8 @@ void LinkList<T>::SelectionSort(bool is_ascend) {
 }
 
 template<class T>
-Node<T>* LinkList<T>::Partion(bool is_ascend, Node<T>* start_prev, Node<T>* end_post) {
+Node<T>* LinkList<T>::Partion(bool is_ascend,
+    Node<T>* start_prev, Node<T>* end_post) {
     printf("partion \n");
     Node<T>* p = start_prev;
     Node<T>* q = start_prev -> next;
@@ -212,8 +214,9 @@ Node<T>* LinkList<T>::Partion(bool is_ascend, Node<T>* start_prev, Node<T>* end_
 }
 
 template<class T>
-void LinkList<T>::QuickSortInterval(bool is_ascend, Node<T>* start_prev, Node<T>* end_post) {
-    if ((start_prev -> next == NULL) || (start_prev -> next == end_post) || 
+void LinkList<T>::QuickSortInterval(bool is_ascend,
+    Node<T>* start_prev, Node<T>* end_post) {
+    if ((start_prev -> next == end_post) ||
             (start_prev -> next -> next == end_post))
         return;
     Node<T>* p = Partion(is_ascend, start_prev, end_post);
@@ -233,7 +236,7 @@ int main() {
     int data[len] = {1, 2};
     LinkList<int> listObj(data, len);
     listObj.print();
-    //listObj.InsertionSort(false);
+    // listObj.InsertionSort(false);
     // listObj.print();
     // listObj.BubbleSort(false);
     // listObj.print();

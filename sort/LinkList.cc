@@ -87,7 +87,7 @@ void LinkList<T>::InsertionSort(bool is_ascend) {
     while (key_pre -> next != NULL) {
         q = head;
         while (q -> next != key_pre -> next) {
-            if (compare(is_ascend, q -> next -> data
+            if (compare(is_ascend, q -> next -> data,
                     key_pre -> next -> data)) {
                 q = q -> next;
             } else {
@@ -189,6 +189,7 @@ void LinkList<T>::SelectionSort(bool is_ascend) {
 
 template<class T>
 Node<T>* LinkList<T>::Partion(bool is_ascend, Node<T>* start_prev, Node<T>* end_post) {
+    printf("partion \n");
     Node<T>* p = start_prev;
     Node<T>* q = start_prev -> next;
     while (q -> next != end_post) {
@@ -212,7 +213,8 @@ Node<T>* LinkList<T>::Partion(bool is_ascend, Node<T>* start_prev, Node<T>* end_
 
 template<class T>
 void LinkList<T>::QuickSortInterval(bool is_ascend, Node<T>* start_prev, Node<T>* end_post) {
-    if ((start_prev -> next == NULL) || (start_prev -> next == end_post))
+    if ((start_prev -> next == NULL) || (start_prev -> next == end_post) || 
+            (start_prev -> next -> next == end_post))
         return;
     Node<T>* p = Partion(is_ascend, start_prev, end_post);
     QuickSortInterval(is_ascend, start_prev, p);

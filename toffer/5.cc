@@ -10,8 +10,8 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (), 
- *   Organization:  
+ *         Author:  yang_bao_xing@163.com 
+ *   Organization:  ict
  *
  * =====================================================================================
  */

@@ -1,5 +1,24 @@
-#include<cstdio>
+/*
+ * =====================================================================================
+ *
+ *       Filename:  wandoujia3.cc
+ *
+ *    Description:  print subset of set
+ *
+ *        Version:  1.0
+ *        Created:  05/29/2013 07:42:53 PM
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  yang_bao_xing@163.com
+ *   Organization:  ict
+ *
+ * =====================================================================================
+ */
 
+
+#include<cstdio>
+#include<cstring>
 
 void print_subset(int* data, int len, int* result, int rlen) {
     if (len == 0){
@@ -12,14 +31,10 @@ void print_subset(int* data, int len, int* result, int rlen) {
     }
     // copy result
     int* tmp = new int[rlen];
-    for (int i = 0; i < rlen; i++) {
-        tmp[i] = result[i];
-    }
+    memcpy(tmp, result, sizeof(int) * rlen);
     print_subset(data + 1, len - 1, result, rlen);
     // restore result
-    for (int i = 0; i < rlen; i++) {
-        result[i]  = tmp[i];
-    }
+    memcpy(result, result, sizeof(int) * rlen);
     result[rlen] = data[0];
     print_subset(data + 1, len - 1, result, rlen + 1);   
 }

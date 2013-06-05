@@ -20,7 +20,7 @@
 #include<cassert>
 
 
-int partion(int* data, int n, bool (*func)(int)) {
+int partion(int* data, int n, bool (*func)(int a)) {
     int left = -1;
     for (int i = 0; i < n; i++) {
         if (func(data[i])) {
@@ -36,7 +36,7 @@ bool is_odd(int v) {
     if (v & 0x1)
         return true;
     return false;
-} 
+}
 
 int main() {
     int data[] = {1, 2, 3, 4, 5};

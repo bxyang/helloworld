@@ -46,7 +46,6 @@ void print(ListNode* head) {
         head = head -> next;
     }
     printf("\n");
-
 }
 
 int main() {

@@ -18,29 +18,27 @@
 
 #include<cstdlib>
 #include<cstdio>
+#include<utility>
 #include<string.h>
 
-void permutation(char* result, char* pool, int pos, int n) {
-    if (pos == n)
-        printf("%s\n", result);
-    int pool_len = strlen(pool);
-    for (int i = 0; i < pool_len; i++) {
-        result[pos] = pool[i];
-        char* remain_pool = new char[pool_len];
-        if (i > 0)
-            memcpy(remain_pool, pool, i);
-        memcpy(remain_pool + i, pool + i + 1, pool_len - i - 1);
-        remain_pool[pool_len] = '\0';
-        permutation(result, remain_pool, pos + 1, n);
+void permutation(char* p_str, char* p_begin) {
+    if ((p_str == NULL) || (p_begin == NULL))
+        return;
+    if (*p_begin == '\0') {
+        printf("%s\n", p_str);
+        return;
     }
-    
+    for (char* p = p_begin; *p != '\0'; p++) {
+        std::swap(*p_begin, *p);
+        permutation(p_str, p_begin + 1);
+        std::swap(*p, *p_begin);
+    }
 }
 
 int main() {
     char* pool = new char[4];
     memcpy(pool, "abc", 4);
-    char* result = new char[4];
-    result[3] = '\0';
-    permutation(result, pool, 0, 3);
+    permutation(pool, pool);
+    delete []pool;
     return 0;
 }

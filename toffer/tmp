@@ -1,0 +1,13 @@
+#include<cstdlib>
+#include<cstdio>
+
+struct BiTreeNode {
+    int data;
+    BiTreeNode* left;
+    BiTreeNode* right;
+};
+
+
+int main() {
+    return 0;
+}

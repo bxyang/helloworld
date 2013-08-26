@@ -16,7 +16,9 @@
  * =====================================================================================
  */
 #include<cassert>
+#include<cstdlib>
 
+/*
 int search_min(int* p, int n) {
     int left = 0;
     int right = n - 2;
@@ -45,8 +47,33 @@ int search_min(int* p, int n) {
     }
     return left;
 }
-
-
+*/
+int search_min(int* data, int n) {
+    if ((data == NULL) || (n < 1))
+        return -1;
+    int left = 0;
+    int right = n - 1;
+    while (left < right) {
+        int mid = left + (right - left)/2;
+        if (data[mid] < data[right])
+            right = mid;
+        else if (data[mid] > data[right])
+            left = mid + 1;
+        else {
+            if (data[mid] == data[left]) {
+                for (int i= left; i <= right; i++) {
+                    if (data[i] < data[mid])
+                        return i;
+                }
+                return left;
+            } else if (data[mid] < data[left])
+                right = mid;
+            else
+                return left;
+        }
+    }
+    return left;
+}
 int main() {
     int a[7] = {6, 7, 8, 1, 2, 3, 4};
     assert(search_min(a, 7) == 3);

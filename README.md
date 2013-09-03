@@ -8,5 +8,7 @@ asked       ------ questions which were asked to write online or on paper
 
 leetcode    ------ questions at http://leetcode.com/onlinejudge 
 
+java_thread ------ some practice code about java thread
+
 others      ------ mei xiang hao
 

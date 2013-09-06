@@ -12,3 +12,7 @@ java_thread ------ some practice code about java thread
 
 others      ------ mei xiang hao
 
+
+android bluetooth game show
+http://v.youku.com/v_show/id_XNTQwMTM2MzYw.html
+

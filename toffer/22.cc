@@ -29,17 +29,14 @@ bool is_valid_poping(const int* push_array, const int* pop_array, int n) {
     while ((pop_i < n)) {
         if ((!helper.empty()) && (helper.top() == pop_array[pop_i])) {
             helper.pop();
-        }
-        else {
+        } else {
             while (push_i < n) {
                 helper.push(push_array[push_i]);
                 if (push_array[push_i] == pop_array[pop_i]) {
                     push_i++;
                     break;
-                }
-                else{
+                } else
                     push_i++;
-                }
             }
             if (helper.top() == pop_array[pop_i])
                 helper.pop();

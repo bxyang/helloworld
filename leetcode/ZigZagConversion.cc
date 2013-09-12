@@ -36,3 +36,32 @@ public:
         return ret;
     }
 };
+
+class Solution {
+public:
+    string convert(string s, int nRows) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function    
+        int len = s.length();
+        string ret(len, '0');
+        int p = 0;
+        if (nRows == 1)
+            return s;
+        const int inc = 2*(nRows-1);
+        for (int j = 0; j < len; j += inc)
+            ret[p++] = s[j];
+        for (int i = 1; i < nRows - 1; i++) {
+            int offset = 2*(nRows - i - 1);
+            int k = i;
+            for (; k + offset < len; k += inc) {
+                ret[p++] = s[k];
+                ret[p++] = s[k+offset];
+            }
+            if (k < len)
+                ret[p++] = s[k];
+        }
+        for (int j = nRows - 1; j < len; j += inc)
+            ret[p++] = s[j];
+        return ret;
+    }
+};

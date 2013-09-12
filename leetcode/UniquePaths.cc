@@ -46,3 +46,21 @@ public:
         return ret;
     }
 };
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<vector<int> > path_num(2, vector<int>(n+1, 1));
+        path_num[0][0] = 0;
+        path_num[1][0] = 0;
+        bool flag = 0;
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j <= n; j++)
+                path_num[1-flag][j] = path_num[1-flag][j-1] + path_num[flag][j];
+            flag = 1 - flag;
+        }
+        return path_num[flag][n];
+    }
+};

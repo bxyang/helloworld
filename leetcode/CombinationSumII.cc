@@ -75,3 +75,73 @@ public:
     }
 };
 
+class Solution {
+public:
+    typedef vector<vector<bool> > vvbool;
+    typedef vector<vector<int> > vvint;
+    typedef vector<int> vint;
+    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        sort(num.begin(), num.end(), cmp);
+        int last = num[0];
+        vector<int> candidates;
+        candidates.push_back(0);
+        vector<int> counts;
+        counts.push_back(0);
+        int cnt = 1;
+        for (int i = 1; i < num.size(); i++) {
+            if (num[i] != last) {
+                candidates.push_back(last);
+                counts.push_back(cnt);
+                last = num[i];
+                cnt = 1;
+            } else
+                cnt++;
+        }
+        candidates.push_back(last);
+        counts.push_back(cnt);
+        
+        vvbool dp(candidates.size(), vector<bool>(target+1, false));
+        dp[0][0] = true;
+        for (int i = 1; i < candidates.size(); i++) {
+            for (int j = 0; j <= target; j++) {
+                if (!dp[i-1][j])
+                    continue;
+                for (int k = 0, v = j; (k <= counts[i]) && (v <= target); 
+                    k++, v+= candidates[i]) {
+                    dp[i][v] = true;    
+                }
+            }
+        }
+        
+        vvint ret;
+        vint path;
+        findPath(dp, candidates.size() - 1, candidates, counts, path, ret, target);
+        return ret;
+    }
+    
+    void findPath(vvbool &dp, int n, vint &candidates, vint &counts, vint &path, vvint& ret, int target) {
+        if (target == 0) {
+            if (path.size() > 0)
+                ret.push_back(path);
+            return;
+        } else if (n == 0)
+            return;
+        
+        if (!dp[n][target]) {
+            findPath(dp, n-1, candidates, counts, path, ret, target);
+            return;
+        }
+        int i = 0;
+        for (; (i <= counts[n]) && (target >= 0) ; i++, target -= candidates[n]) {
+            findPath(dp, n - 1, candidates, counts, path, ret, target);
+            path.push_back(candidates[n]);
+        }
+        for (int j = 0; j < i; j++)
+            path.pop_back();
+    }
+    static bool cmp(int i, int j) {
+        return i > j;
+    }
+};

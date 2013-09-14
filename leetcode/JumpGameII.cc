@@ -51,3 +51,37 @@ public:
         return min_jump[0];
     }
 };
+
+class Solution {
+public:
+    int jump(int A[], int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        if (n == 1)
+            return 0;
+        int next = 0;
+        int cnt = 1;
+        int start = 0;
+        int end = 0;
+        for (int i = 1; i < n; i++) {
+            if (next + A[next] >= n - 1)
+                return cnt;
+            start = end + 1;
+            end = next + A[next];
+            next = getNext(A, start, end);
+            cnt++;
+        }
+    }
+    
+    int getNext(int A[], int start, int end) {
+        int ret = start;
+        int m = start;
+        for (int i = start; i <= end; i++) {
+            if (i + A[i] > m) {
+                ret = i;
+                m = i + A[i];
+            }
+        }
+        return ret;
+    }
+};

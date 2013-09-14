@@ -64,4 +64,54 @@ public:
         }
     }
 };
-
+class Solution {
+public:
+    typedef vector<vector<bool> > vvbool;
+    typedef vector<vector<int> > vvint;
+    typedef vector<int> vint;
+    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int can_num = candidates.size();
+        sort(candidates.begin(), candidates.end(), cmp);
+        vector<vector<bool> > dp(can_num+1, vector<bool>(target+1, false));
+        dp[0][0] = true;
+        for (int i = 1; i <= can_num; i++) {
+            for (int j = 0; j <= target; j++) {
+                if (!dp[i-1][j])
+                    continue;
+                for (int k = j; k <= target; k += candidates[i-1])
+                    dp[i][k] = true;
+            }
+        }
+        vvint ret;
+        vint path;
+        findPath(candidates, dp, can_num, target, ret, path);
+        return ret;
+    }
+    
+    void findPath(vint &candidates, vvbool &dp, int n, int target, vvint &ret, vint &path) {
+        if (target == 0) {
+            if (path.size() > 0)
+                ret.push_back(path);
+            return;
+        } else if (n == 0){
+            return;
+        }
+        if (!dp[n][target]) {
+            findPath(candidates, dp, n-1, target, ret, path);
+            return;
+        }
+        int i = 0;
+        for (; target >= 0; target -= candidates[n-1], i++) {
+            findPath(candidates, dp, n-1, target, ret, path);
+            path.push_back(candidates[n-1]);
+        }
+        for (int j = 0; j < i; j++)
+            path.pop_back();
+    }
+    
+    static bool cmp(int i, int j) {
+        return i > j;
+    }
+};

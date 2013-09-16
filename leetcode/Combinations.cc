@@ -54,3 +54,68 @@ public:
     }
 };
  
+
+class Solution {
+public:
+    vector<vector<int> > combine(int n, int k) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<vector<int> > ret;
+        if (k > n)
+            k = n;
+        if (n <= 0)
+            return ret;
+        vector<int> item;
+        while (true) {
+            if (!item.empty() && (item.back() > n)) {
+                item.pop_back();
+                if (item.empty())
+                    break;
+                item.back()++;
+            } else if (item.size() >= k) {
+                ret.push_back(item);
+                item.back()++;
+            } else {
+                if (item.empty())
+                    item.push_back(1);
+                else
+                    item.push_back(item.back() + 1);
+            }
+        }
+        return ret;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int> > combine(int n, int k) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<vector<int> > ret;
+        if (k > n)
+            k = n;
+        if (n <= 0)
+            return ret;
+        vector<int> item;
+        while (true) {
+            if (!item.empty() && (item.back() > n)) {
+                item.pop_back();
+                if (item.empty())
+                    break;
+                if (item[0] == (n-k+1))
+                    break;
+                item.back()++;
+            } else if (item.size() >= k) {
+                ret.push_back(item);
+                item.back()++;
+            } else {
+                if (item.empty())
+                    item.push_back(1);
+                else
+                    item.push_back(item.back() + 1);
+            }
+        }
+        return ret;
+    }
+};
+

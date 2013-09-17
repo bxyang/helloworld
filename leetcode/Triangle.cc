@@ -31,6 +31,22 @@ public:
     int minimumTotal(vector<vector<int> > &triangle) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
+        int n = triangle.size();
+        vector<int> dp(triangle[n-1]);
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = 0; j <= i; j++)
+                dp[j] = triangle[i][j] + (dp[j] < dp[j+1] ? dp[j] : dp[j+1]);
+        }
+        return dp[0];
+    }
+};
+
+
+class Solution {
+public:
+    int minimumTotal(vector<vector<int> > &triangle) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
         return minimumTotalCore(triangle, 0, 0);        
     }
     
@@ -42,6 +58,8 @@ public:
         return left_sum > right_sum ? (left_sum + triangle[r][c]) : (right_sum + triangle[r][c]);
     }
 };
+
+
 class Solution {
 public:
     int minimumTotal(vector<vector<int> > &triangle) {
@@ -68,4 +86,3 @@ public:
         return ret;
     }
 };
-

@@ -36,6 +36,33 @@ public:
     void sortColors(int A[], int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
+        int p0 = 0;
+        while (A[p0] == 0)
+            p0++;
+        int p2 = n - 1;
+        while (A[p2] == 2)
+            p2--;
+        int i = p0;
+        while (i <= p2) {
+            if (A[i] == 1) {
+                i++;
+                continue;
+            }
+            else if (A[i] == 0) {
+                swap(A[i++], A[p0++]);
+            } else {
+                swap(A[i], A[p2--]);
+            }
+        }
+    }
+};
+
+
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
         int i = 0;
         int p1 = n - 1;
         int p2 = n - 1;

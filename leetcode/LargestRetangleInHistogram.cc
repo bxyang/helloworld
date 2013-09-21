@@ -109,3 +109,74 @@ public:
         return ret;
     }
 };
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int> &height) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        stack<int> st_i;
+        int maxArea = 0;
+        for (int i = 0; i < height.size(); i++) {
+            if (st_i.empty()) 
+                st_i.push(i);
+            else {
+                if (height[i] > height[st_i.top()])
+                    st_i.push(i);
+                else if (height[i] < height[st_i.top()]) {
+                    int itop;
+                    while (!st_i.empty()) {
+                        if (height[i] >= height[st_i.top()])
+                            break;
+                        itop = st_i.top();
+                        int a = (i - itop)*height[itop];
+                        maxArea = a > maxArea ? a : maxArea;
+                        st_i.pop();
+                    }
+                    if (st_i.empty() || (height[i] > height[st_i.top()])) {
+                        st_i.push(itop);
+                        height[itop] = height[i];
+                    }
+                }
+            }
+        }
+        
+        while (!st_i.empty()) {
+            int a = (height.size() - st_i.top())*height[st_i.top()];
+            maxArea = a > maxArea ? a : maxArea;
+            st_i.pop();
+        }
+        return maxArea;
+    }
+};
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int> &height) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        stack<int> st;
+        int i = 0;
+        int maxArea = 0;
+        while (i < height.size()) {
+            if (st.empty() || height[st.top()] < height[i])
+                st.push(i++);
+            else {
+                int start = st.top();
+                st.pop();
+                int width = (st.empty() ? i: i - st.top() - 1);
+                int a = height[start] * width;
+                maxArea = (a > maxArea) ? a : maxArea;
+            }
+        }
+        
+        while (!st.empty()) {
+            int a = height[st.top()];
+            st.pop();
+            a = a * (st.empty() ? height.size(): height.size() - st.top() - 1);
+            maxArea = (a > maxArea) ? a : maxArea;
+        }
+        
+        return maxArea;
+    }
+};

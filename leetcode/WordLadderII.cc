@@ -44,6 +44,78 @@ public:
     vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
+        vector<vector<string> > paths;
+        
+        
+        dict.insert(start);
+        dict.insert(end);
+        unordered_map<string, vector<string> > traces;
+        vector<string> prev;
+        for (unordered_set<string>::iterator it = dict.begin(); it != dict.end(); it++)
+            traces[*it] = prev;
+        vector<unordered_set<string> > layers(2);  
+        bool flag = 0; 
+        layers[flag].insert(start);      
+        while (true) {
+            for (unordered_set<string>::iterator it = layers[flag].begin(); 
+                    it != layers[flag].end(); it++) {
+                dict.erase(*it);
+            }
+            layers[!flag].clear();
+            for (unordered_set<string>::iterator it = layers[flag].begin(); 
+                    it != layers[flag].end(); it++) {
+                string last = (*it);
+                for (int i = 0; i < last.size(); i++) {
+                    char c = last[i];
+                    for (int j = 1; j < 26; j++) {
+                        last[i] = (c - 'a' + j) % 26 + 'a';
+                        if (dict.find(last) == dict.end())
+                            continue;
+                        traces[*it].push_back(last);
+                        layers[!flag].insert(last);
+                    }
+                    last[i] = c;
+                }
+            }
+            
+            if (layers[!flag].empty())
+                return paths;
+            if (layers[!flag].count(end))
+                break;
+            flag = (!flag);
+        }
+        
+        vector<string> item;
+        item.push_back(start);
+        buildPaths(traces, end, paths, item);
+        return paths;
+    }
+    
+    
+    void buildPaths(unordered_map<string, vector<string> > &traces, string &end,
+        vector<vector<string> > &paths, vector<string> &item) {
+        string last = item.back();
+        if (last == end) {
+            paths.push_back(item);
+            return;
+        }
+        vector<string> next = traces[last];
+        
+        for (vector<string>::iterator it = next.begin(); it != next.end(); it++) {
+            item.push_back(*it);            
+            buildPaths(traces, end, paths, item);
+            item.pop_back();
+        }
+        
+    } 
+};
+
+
+class Solution {
+public:
+    vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
         
         vector<vector<string> > ret;
         if (start == end) {

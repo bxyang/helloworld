@@ -54,6 +54,51 @@ public:
         // DO NOT write int main() function
         if (root == NULL)
             return;
+        TreeLinkNode* top = root;
+        TreeLinkNode* mid = new TreeLinkNode(-1);
+        TreeLinkNode* to_be_deleted = mid;
+        TreeLinkNode* next = NULL;
+        while (top != NULL) {
+            if (top -> left == NULL) {
+                if (top -> right != NULL) { 
+                    mid -> next = top -> right;
+                    mid = mid -> next;
+                    if (next == NULL) next = top -> right;
+                }
+                top = top -> next;
+            } else {
+                mid -> next = top -> left;
+                mid = mid -> next;
+                if (next == NULL) next = top -> left;
+                if (top -> right != NULL) {
+                    mid -> next = top -> right;
+                    mid = mid -> next;
+                }
+                top = top -> next;
+            }
+        }
+        delete to_be_deleted;
+        connect(next);
+    }
+};
+
+
+
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        if (root == NULL)
+            return;
         list<TreeLinkNode*> q1;
         root -> next = NULL;
         q1.push_back(root);

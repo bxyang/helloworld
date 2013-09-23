@@ -40,6 +40,68 @@ public:
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
         sort(S.begin(), S.end());
+        vector<int> item;
+        vector<vector<int> > result;
+        subsetsWithDupCore(result, S, item, 0);
+        return result;
+    }
+    
+    void subsetsWithDupCore(vector<vector<int> > &result, vector<int> &S,
+        vector<int> &item, int next) {
+        result.push_back(item);
+        for (int i = next; i < S.size(); i++) {
+            if ((i != next) && (S[i] == S[i-1]))
+                continue;
+            item.push_back(S[i]);
+            subsetsWithDupCore(result, S, item, i+1);
+            item.pop_back();
+        }
+    }
+}; 
+ 
+class Solution {
+public:
+    vector<vector<int> > subsetsWithDup(vector<int> &S) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        sort(S.begin(), S.end());
+        vector<vector<int> > result;
+        result.push_back(vector<int>());
+        subsetsWithDupCore(result, S, S.size() - 1);
+        return result;
+    }
+    
+    void subsetsWithDupCore(vector<vector<int> > &result, vector<int> &S, int next) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        if (next < 0)
+            return;
+        int i = next - 1;
+        for (; i >= 0; i--) {
+            if (S[i] != S[next])
+                break;
+        }
+        
+        int count = ( (next != 0) ? (next - i) : 1);
+        subsetsWithDupCore(result, S, next - count);
+        int result_len = result.size();
+        for (int j = 0; j < count; j++) {
+            int start = j*result_len;
+            int end = start + result_len;
+            for (int k = start; k < end; k++) {
+                result.push_back(result[k]);
+                result.back().push_back(S[next]);
+            }
+        }
+    }
+};
+ 
+class Solution {
+public:
+    vector<vector<int> > subsetsWithDup(vector<int> &S) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        sort(S.begin(), S.end());
         return subsetsWithDup(S, 0);
     }
     

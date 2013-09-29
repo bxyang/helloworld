@@ -13,6 +13,8 @@ java_thread ------ some practice code about java thread
 others      ------ mei xiang hao
 
 
+简历：https://docs.google.com/document/d/1VTepwubvcALmrcJc_TGOyT0J1B9VvusedhCcvCBvRFg/edit?usp=sharing
+
 android bluetooth game show
 http://v.youku.com/v_show/id_XNTQwMTM2MzYw.html
 

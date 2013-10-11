@@ -16,6 +16,80 @@
  * =====================================================================================
  */
 
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int k = lists.size();
+        if (k < 1)
+            return NULL;
+        if (k == 1)
+            return lists[0];
+        
+        vector<ListNode* > heap;
+        for (int i = 0; i < k; i++) {
+            if (lists[i] != NULL)
+                heap.push_back(lists[i]);
+        }
+        buildHeap(heap);
+        
+        ListNode* head = new ListNode(-1);
+        ListNode* tail = head;
+        
+        while (!heap.empty()){
+            tail -> next = heap[0];
+            tail = tail -> next;
+            if (tail -> next == NULL) {
+                heap[0] = heap[heap.size() - 1];
+                heap.pop_back();
+            } else {
+                heap[0] = tail -> next;
+            }
+            MinHeapify(heap, 0);
+        }
+        
+        tail -> next = NULL;
+        return head -> next;
+        
+    }
+    
+    void buildHeap(vector<ListNode *> &lists) {
+        int n = lists.size();
+        for (int i = n/2 - 1; i >= 0; i--)
+            MinHeapify(lists, i);
+    }
+    
+    void MinHeapify(vector<ListNode *> &lists, int i) {
+        int n = lists.size();
+        int left = 2*i+1;
+        int right = left+1;
+        int min_pos = i;
+        if (right < n) {
+            min_pos = (lists[i] -> val < lists[left] -> val ? i : left);
+            min_pos = (lists[min_pos] -> val < lists[right] -> val ? min_pos : right);
+        } else if (left < n)
+            min_pos = (lists[i] -> val < lists[left] -> val ? i : left);
+        if (min_pos == i)
+            return;
+        swap(lists[i], lists[min_pos]);
+        MinHeapify(lists, min_pos);
+    }
+};
+
+
+
+
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {

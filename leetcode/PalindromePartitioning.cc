@@ -18,6 +18,56 @@
 
 class Solution {
 public:
+    vector<vector<string> > partition(string s) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        const int n = s.length();
+        vector<vector<bool> > dp(n, vector<bool>(n ,false));
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = true;
+            for (int j = i-1, k = i + 1; (j >= 0) && (k < n); j--, k++) {
+                if (s[j] == s[k])
+                    dp[j][k] = true;
+                else
+                    break;
+            }
+            for (int j = i, k = i+1; (j >= 0) && (k < n); j--, k++) {
+                if (s[j] == s[k])
+                    dp[j][k] = true;
+                else
+                    break;
+            }
+        }
+        
+        vector<vector<string> > ret;
+        vector<string> item;
+        dp_partiton_helper(ret, dp, s, 0, item);
+        return ret;
+    }
+    
+    void dp_partiton_helper(vector<vector<string> > &ret, vector<vector<bool> > &dp, string &s, 
+            int i, vector<string> &item) {
+        const int n = s.length();
+        if (i == s.size()) {
+            ret.push_back(item);
+            return;
+        }
+        
+        for (int j = i; j < n; j++) {
+            if (!dp[i][j])
+                continue;
+            item.push_back(s.substr(i, j- i + 1));
+            dp_partiton_helper(ret, dp, s, j+1, item);
+            item.pop_back();
+        }
+        return;
+    } 
+};
+
+
+
+class Solution {
+public:
     vector<vector<string>> partition(string s) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function

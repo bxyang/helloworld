@@ -76,3 +76,22 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<int> grayCode(int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<int> ret(1<<n, 0);
+        if (n == 0)
+            return ret;
+        ret[1] = 1;
+        int len = 2;
+        for (int i = 2; i <= n; i++) {
+            for (int j = len - 1; j >= 0; j--)
+                ret[len + (len - 1 - j)] = ret[j] | (1 << (i-1));
+            len <<= 1;
+        }
+        return ret;
+    }
+};
+

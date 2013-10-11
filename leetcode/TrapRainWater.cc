@@ -31,6 +31,38 @@ public:
     int trap(int A[], int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
+        int peak = 0;
+        for (int i = 1; i < n; i++) {
+            if (A[i] > A[peak])
+                peak = i;
+        }
+        
+        int left = 0;
+        int sum = 0;
+        for (int i = 0; i < peak; i++) {
+            if (left <= A[i])
+                left = A[i];
+            else
+                sum += (left - A[i]);
+        }
+        int right = 0;
+        for (int i = n - 1; i > peak; i--) {
+            if (right <= A[i])
+                right = A[i];
+            else
+                sum += (right - A[i]);
+        }
+        
+        return sum;    
+    }
+};
+
+
+class Solution {
+public:
+    int trap(int A[], int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
         int left = 0;
         int right = n - 1;
         while (left < right){
@@ -67,3 +99,5 @@ public:
         return area;
     }
 };
+
+

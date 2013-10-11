@@ -32,6 +32,25 @@ public:
     bool canJump(int A[], int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
+        int cover = 0;
+        for (int i = 0; i < n; i++) {
+            if (cover < i)
+                return false;
+            if (A[i] + i > cover)
+                cover = A[i] + i;
+            if (cover >= n - 1)
+                return true;
+        }
+        return true;
+    }
+};
+
+
+class Solution {
+public:
+    bool canJump(int A[], int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
         if (n < 1)
             return false;
         vector<int> can_reach(n, -1);

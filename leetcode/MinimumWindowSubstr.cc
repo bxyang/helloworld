@@ -30,6 +30,49 @@
  * =====================================================================================
  */
 
+
+class Solution {
+public:
+    string minWindow(string S, string T) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int need_to_find[256];
+        memset(need_to_find, 0, sizeof(need_to_find));
+        for (string::iterator it = T.begin(); it != T.end(); it++)
+            need_to_find[*it]++;
+        int has_found[256];
+        memset(has_found, 0, sizeof(has_found));
+        
+        int min_win_start = -1;
+        int count = 0;
+        int min_win_len = INT_MAX;
+        for (int begin = 0, end = 0; end < S.length(); end++) {
+            if (need_to_find[S[end]] == 0)
+                continue;
+            has_found[S[end]]++;
+            if (has_found[S[end]] <= need_to_find[S[end]])
+                count++;
+            if (count == T.length()) {
+                while ((need_to_find[S[begin]] == 0) || (
+                    has_found[S[begin]] > need_to_find[S[begin]])){
+                    if (has_found[S[begin]] > need_to_find[S[begin]])
+                        has_found[S[begin]]--;
+                    begin++;
+                }
+                if (end-begin+1 < min_win_len) {
+                    min_win_len = end - begin + 1;
+                    min_win_start = begin;
+                }
+            }
+        }
+        if (min_win_start == -1)
+            return "";
+        return S.substr(min_win_start, min_win_len);
+    }
+};
+
+
+
 class Solution {
 public:
     string minWindow(string S, string T) {

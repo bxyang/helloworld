@@ -32,6 +32,30 @@
  */
 
 class Solution {
+ public:
+    string getPermutation(int n, int k) {
+        vector<int> fn(n+1, 1);
+        string str(n, '0');
+        for (int i = 1; i <= n; i++) {
+            fn[i] = fn[i-1]*i;
+            str[i-1] = '0' + i;
+        }
+
+        int next = 0;
+        while (next < n) {
+            int p = (k-1) / fn[n-next-1];
+            char c = str[next+p];
+            for (int end = next+p; end > next ; end--)
+                str[end] = str[end-1];
+            str[next] = c;
+            next++;
+            k = k - p*fn[n-next];
+        }        
+        return str;
+    }
+}; 
+ 
+class Solution {
 public:
     string getPermutation(int n, int k) {
         // Start typing your C/C++ solution below

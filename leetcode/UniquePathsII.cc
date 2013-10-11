@@ -77,3 +77,32 @@ public:
     }
 };
 
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int m = obstacleGrid.size();
+        int n = obstacleGrid[0].size();
+        
+        vector<vector<int> > path_num(2, vector<int>(n+1, 0));
+        for (int i = 1; i <= n; i++) {
+            if (obstacleGrid[0][i-1] == 0)
+                path_num[0][i] = 1;
+            else
+                break;
+        }
+        bool flag = 0;
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (obstacleGrid[i][j-1] == 0)
+                    path_num[1-flag][j] = path_num[1-flag][j-1] + path_num[flag][j];
+                else
+                    path_num[1-flag][j] = 0;
+            }
+            flag = 1 - flag;
+        }
+        return path_num[flag][n];
+    }
+};
+

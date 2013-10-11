@@ -86,3 +86,37 @@ public:
     }
 };
 
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isValidBST(TreeNode *root) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<int> v;
+        inOrder(root, v);
+        if (v.size() < 2)
+            return true;
+        for (int i = 1; i < v.size(); i++) {
+            if (v[i] <= v[i-1])
+                return false;
+        }
+        return true;
+    }
+    
+    void inOrder(TreeNode* root, vector<int>& v) {
+        if (root == NULL)
+            return;
+        inOrder(root -> left, v);
+        v.push_back(root -> val);
+        inOrder(root -> right, v);
+    }
+};

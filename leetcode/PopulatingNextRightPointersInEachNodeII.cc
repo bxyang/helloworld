@@ -50,6 +50,51 @@
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if (root == NULL) return;
+        TreeLinkNode* n = NULL;
+        TreeLinkNode* parent = root;
+        TreeLinkNode* child = NULL;
+        while (parent != NULL) {
+            if ((parent -> left == NULL) && (parent -> right == NULL))
+                parent = parent -> next;
+            else {
+                if (n == NULL) {
+                    n = (parent -> left != NULL ? parent -> left : parent -> right);
+                    child = n;
+                }
+                
+                if (parent -> left != NULL) {
+                    child -> next = parent -> left;
+                    child = child -> next;
+                }
+                
+                if (parent -> right != NULL) {
+                    child -> next = parent -> right;
+                    child = child -> next;
+                }
+                
+                parent = parent -> next;
+            }
+        }
+        
+        if (child != NULL) child -> next = NULL;
+        
+        connect(n);
+    }
+};
+
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
         if (root == NULL)

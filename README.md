@@ -14,6 +14,8 @@ jobdu       ------ question from http://ac.jobdu.com/
 
 topcoder    ------ question from https://www.topcoder.com/
 
+usaco       ------ http://cerberus.delos.com:790/usacogate
+
 others      ------ mei xiang hao
 
 

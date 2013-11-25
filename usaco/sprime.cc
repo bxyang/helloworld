@@ -35,24 +35,25 @@ int main() {
     while (start < end) {
         if (!isPrime(start)) { start += 2; continue; }
         int num_prefix = start;
-        int i = 1;
-        for (; i < n; i++) {
-            num_prefix = num_prefix / 10;
+        int i = n-1;
+        
+        for (; i > 0; i--) {
+            num_prefix = start / ten_pow[i];
             if (!isPrime(num_prefix)) {
                 if ((num_prefix & 0x1 == 1) && (num_prefix != 1))
                     num_prefix += 2;
                 else
                     num_prefix += 1;
-                num_prefix *= ten_pow[i];   
+                num_prefix *= ten_pow[i];
                 num_prefix += 1;
                 start = num_prefix;
                 break;
             }
         }
-        if (i == n) {
+        if (i == 0) {
             cout << start << endl;
             start += 2;
-        }
+        } 
     }
     return 0;
 }

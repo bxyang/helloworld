@@ -19,8 +19,11 @@
 
 #include<iostream>
 #include<vector>
+#include<cstdio>
+#include<cstdlib>
 using namespace std;
 
+/* 
 class A {
  public:
     A() {
@@ -36,14 +39,34 @@ class A {
     }
     int i;
 };
+*/
+
+class A {
+ public:
+	~A();
+};
+A::~A() {
+	printf("delete A ");
+}
+
+class B : public A {
+ public:
+	~B();
+};
+B::~B() {
+	printf("delete B ");
+}
 
 int main() {
+    //A* pa = new A[10];
+    //delete pa;
+    //A ar[5];
+
     /* 
-    A* pa = new A[10];
-    delete pa;
-    A ar[5];
-    */
     vector<A> va(5);
     cout << va[0].i << endl;
+    */
+    A* pa = new B();
+    delete pa;
     return 0;
 }

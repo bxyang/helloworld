@@ -33,6 +33,9 @@ class Base {
      virtual void foo() {
         cout << "base foo" << endl;
      }
+     char value() {
+        return 'A';
+     }
 };
 
 class Derived: public Base {
@@ -50,11 +53,15 @@ class Derived: public Base {
      virtual void foo() {
         cout << "derived foo" << endl;
      }
+
+     virtual char value() {
+        return 'D';
+     }
 };
 
 int main() {
-    Base* p = new Derived();
-    delete p;
+    Base* b1 = new Derived();
+    cout << b1 -> value();
     cout << endl;
     return 0;
 }

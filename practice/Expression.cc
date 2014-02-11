@@ -1,30 +1,28 @@
 /*
  * =====================================================================================
  *
- *       Filename:  1-8-Elevator.cc
+ *       Filename:  Expression.cc
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  2013/10/1 15:03:01
+ *        Created:  2013/9/26 10:39:05
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  yang_bao_xing@163.com 
- *   Organization:  ict
+ *         Author:  YOUR NAME (), 
+ *   Organization:  
  *
  * =====================================================================================
  */
 
 
 
-int minStepFloor(int* data, int n) {
-    int n1;
-    int n2;
-    int n3;
-    n1 = 0;
-    n2 = data[0];
-
-
-
+int main() {
+    double d = 3/2;
+    d >> 1;
+    int n = 3;
+    d/n;
+    !d && (n-3);
+    (d-0.2) | n;
 }

@@ -5,7 +5,7 @@
 4. ./a.out
 
 the code create a 784 * 100 * 10 three layer nn with mse loss,
-after 10 epoch training, the Accuracy ont test dataset is about 
+after 5 epoch training, the Accuracy ont test dataset is about 
 
 
 

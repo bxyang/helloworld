@@ -4,6 +4,6 @@
 3. g++ -ggdb --std=c++11 mlp_mnist.cc 
 4. ./a.out
 
-the code create a 784 * 100 * 10 three layer nn
-after 10 epoch, the Accuracy ont test dataset is about 
+the code create a 784 * 100 * 10 three layer nn with mse loss,
+after 10 epoch training, the Accuracy ont test dataset is about 
  
